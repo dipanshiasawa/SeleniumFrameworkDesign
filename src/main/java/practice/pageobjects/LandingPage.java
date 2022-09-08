@@ -32,11 +32,16 @@ public class LandingPage extends AbstractComponent {
 	@FindBy(id="login")
 	WebElement submit;
 	
+	@FindBy(css="#toast-container")
+	WebElement toast;
+	
+		
 	public void loginApplication(String email, String password)
 	{
 		userEmail.sendKeys(email);
 		userPassword.sendKeys(password);
 		submit.click();
+		waitForElementToDisappear(toast);
 	}
 	
 	

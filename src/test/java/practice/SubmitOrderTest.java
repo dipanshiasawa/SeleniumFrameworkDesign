@@ -14,6 +14,7 @@ import org.testng.Assert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import practice.pageobjects.LandingPage;
+import practice.pageobjects.ProductCatalogue;
 
 public class SubmitOrderTest {
 
@@ -31,19 +32,22 @@ public class SubmitOrderTest {
 		landingPage.goTo();
 		landingPage.loginApplication("dipanshi@gmail.com", "Test@123");
 
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("#toast-container")));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mb-3")));
 		
-		List<WebElement> products = driver.findElements(By.cssSelector(".mb-3"));
 		
-		WebElement prod = products.stream().filter(product->
-		product.findElement(By.cssSelector("b")).getText().equals(productName)).findFirst().orElse(null);
+		ProductCatalogue productCatalogue = new ProductCatalogue(driver);
+		List<WebElement> products = productCatalogue.getProductList();
 		
-		prod.findElement(By.cssSelector("button:last-of-type")).click();
+		productCatalogue.addProductToCart(productName);
+		
+		
+		
+		
+		
+		
 				
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
-		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.cssSelector(".ng-animating"))));
+
+
+		
 		driver.findElement(By.cssSelector("[routerlink*='cart']")).click();
 		
 		List<WebElement> cartProducts = driver.findElements(By.xpath("//*[@class='cartSection']/h3"));
@@ -55,7 +59,7 @@ public class SubmitOrderTest {
 		Actions action = new Actions(driver);
 		action.sendKeys(driver.findElement(By.cssSelector("[placeholder='Select Country']")), "india").build().perform();
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
 		driver.findElement(By.xpath("(//button[contains(@class,'ta-item')])[2]")).click();
 		driver.findElement(By.cssSelector(".action__submit")).click();
 		

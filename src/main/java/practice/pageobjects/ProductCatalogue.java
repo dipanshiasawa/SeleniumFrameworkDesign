@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import practice.AbstractComponents.AbstractComponent;
 
@@ -27,12 +28,32 @@ public class ProductCatalogue extends AbstractComponent {
 	@FindBy(css=".mb-3")
 	List<WebElement> products;
 	
+	@FindBy(css=".ng-animating")
+	WebElement spinner;
+	
 	By productsBy = By.cssSelector(".mb-3");
+	By addToCart = By.cssSelector("button:last-of-type");
+	By toast = By.cssSelector("#toast-container");
 	
 	public List<WebElement> getProductList() {
 		waitForElementToAppear(productsBy);
 		return products;
 
+	}
+	
+	public WebElement getProductByName(String productName) {
+		
+		WebElement prod = getProductList().stream().filter(product->
+		product.findElement(By.cssSelector("b")).getText().equals(productName)).findFirst().orElse(null);
+		return prod;
+	}
+	
+	public void addProductToCart(String productName) {
+		WebElement prod = getProductByName(productName);
+		prod.findElement(addToCart).click();
+		waitForElementToAppear(toast);
+		waitForElementToDisappear(spinner);
+		
 	}
 	
 }
