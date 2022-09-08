@@ -36,12 +36,14 @@ public class LandingPage extends AbstractComponent {
 	WebElement toast;
 	
 		
-	public void loginApplication(String email, String password)
+	public ProductCatalogue loginApplication(String email, String password)
 	{
 		userEmail.sendKeys(email);
 		userPassword.sendKeys(password);
 		submit.click();
 		waitForElementToDisappear(toast);
+		ProductCatalogue productCatalogue = new ProductCatalogue(driver);
+		return productCatalogue;
 	}
 	
 	

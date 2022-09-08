@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import practice.pageobjects.CartPage;
 import practice.pageobjects.LandingPage;
 import practice.pageobjects.ProductCatalogue;
 
@@ -30,31 +31,16 @@ public class SubmitOrderTest {
 		
 		LandingPage landingPage = new LandingPage(driver);
 		landingPage.goTo();
-		landingPage.loginApplication("dipanshi@gmail.com", "Test@123");
+		ProductCatalogue productCatalogue = landingPage.loginApplication("dipanshi@gmail.com", "Test@123");
 
-		
-		
-		ProductCatalogue productCatalogue = new ProductCatalogue(driver);
 		List<WebElement> products = productCatalogue.getProductList();
-		
 		productCatalogue.addProductToCart(productName);
+		CartPage cartPage = productCatalogue.goToCartPage();
 		
-		
-		
-		
-		
-		
-				
-
-
-		
-		driver.findElement(By.cssSelector("[routerlink*='cart']")).click();
-		
-		List<WebElement> cartProducts = driver.findElements(By.xpath("//*[@class='cartSection']/h3"));
-		Boolean match = cartProducts.stream().anyMatch(cartProduct->cartProduct.getText().equalsIgnoreCase(productName));
+		Boolean match = cartPage.VerifyProductDisplay(productName);
 		Assert.assertTrue(match);
+		cartPage.goToCheckout();
 		
-		driver.findElement(By.cssSelector(" .totalRow button")).click();
 		
 		Actions action = new Actions(driver);
 		action.sendKeys(driver.findElement(By.cssSelector("[placeholder='Select Country']")), "india").build().perform();
