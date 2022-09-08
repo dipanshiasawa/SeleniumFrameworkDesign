@@ -53,8 +53,8 @@ public class ProductCatalogue extends AbstractComponent {
 		prod.findElement(addToCart).click();
 		waitForElementToAppear(toast);
 		//Since the demo website is having some issue, using thread.sleep here and commenting the actual code
-//		waitForElementToDisappear(spinner);
-		waitForOneSecond();
+		waitForElementToDisappear(spinner);
+//		waitForOneSecond();
 	}
 	
 }
