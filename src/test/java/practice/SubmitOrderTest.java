@@ -14,6 +14,8 @@ import org.testng.Assert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import practice.pageobjects.CartPage;
+import practice.pageobjects.CheckoutPage;
+import practice.pageobjects.ConfirmationPage;
 import practice.pageobjects.LandingPage;
 import practice.pageobjects.ProductCatalogue;
 
@@ -39,22 +41,12 @@ public class SubmitOrderTest {
 		
 		Boolean match = cartPage.VerifyProductDisplay(productName);
 		Assert.assertTrue(match);
-		cartPage.goToCheckout();
-		
-		
-		Actions action = new Actions(driver);
-		action.sendKeys(driver.findElement(By.cssSelector("[placeholder='Select Country']")), "india").build().perform();
-		
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
-		driver.findElement(By.xpath("(//button[contains(@class,'ta-item')])[2]")).click();
-		driver.findElement(By.cssSelector(".action__submit")).click();
-		
-		String confirmMessage = driver.findElement(By.cssSelector(".hero-primary")).getText();
+		CheckoutPage checkoutPage = cartPage.goToCheckout();
+		checkoutPage.selectCountry("india");
+		ConfirmationPage confirmationPage = checkoutPage.submitOrder();
+		String confirmMessage = confirmationPage.verifyConfirmationMessage();
 		Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
 		driver.close();
-		
-		
-		
 		
 	}
 	
