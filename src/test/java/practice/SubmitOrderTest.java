@@ -18,7 +18,7 @@ import practice.pageobjects.ProductCatalogue;
 
 public class SubmitOrderTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		String productName = "ZARA COAT 3";
 		WebDriverManager.chromedriver().setup();

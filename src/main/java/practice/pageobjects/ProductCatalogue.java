@@ -48,12 +48,13 @@ public class ProductCatalogue extends AbstractComponent {
 		return prod;
 	}
 	
-	public void addProductToCart(String productName) {
+	public void addProductToCart(String productName) throws InterruptedException {
 		WebElement prod = getProductByName(productName);
 		prod.findElement(addToCart).click();
 		waitForElementToAppear(toast);
-		waitForElementToDisappear(spinner);
-		
+		//Since the demo website is having some issue, using thread.sleep here and commenting the actual code
+//		waitForElementToDisappear(spinner);
+		waitForOneSecond();
 	}
 	
 }

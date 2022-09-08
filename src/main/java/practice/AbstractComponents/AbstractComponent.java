@@ -33,5 +33,10 @@ public class AbstractComponent {
 
 	}
 	
+	public void waitForOneSecond() throws InterruptedException {
+		Thread.sleep(1000);
+
+	}
+	
 	
 }
