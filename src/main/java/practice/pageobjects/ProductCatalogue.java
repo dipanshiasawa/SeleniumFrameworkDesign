@@ -1,48 +1,38 @@
 package practice.pageobjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ProductCatalogue {
+import practice.AbstractComponents.AbstractComponent;
+
+public class ProductCatalogue extends AbstractComponent {
 	
 	WebDriver driver;
 	
 	public ProductCatalogue(WebDriver driver)
 	{
+		super(driver);
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
 
 	
-	//WebElement userEmail = driver.findElement(By.id("userEmail"));
-	//PageFactory
+	//List<WebElement> products = driver.findElements(By.cssSelector(".mb-3"));
 	
-	@FindBy(id="userEmail")
-	WebElement userEmail;
+	@FindBy(css=".mb-3")
+	List<WebElement> products;
 	
-	@FindBy(id="userPassword")
-	WebElement userPassword;
+	By productsBy = By.cssSelector(".mb-3");
 	
-	@FindBy(id="login")
-	WebElement submit;
-	
-	public void loginApplication(String email, String password)
-	{
-		userEmail.sendKeys(email);
-		userPassword.sendKeys(password);
-		submit.click();
+	public List<WebElement> getProductList() {
+		waitForElementToAppear(productsBy);
+		return products;
+
 	}
-	
-	
-	public void goTo()
-	{
-		driver.get("https://rahulshettyacademy.com/client");
-	}
-	
-	
-	
 	
 }
