@@ -15,7 +15,7 @@ import org.testng.Assert;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import practice.pageobjects.LandingPage;
 
-public class StandAloneTest {
+public class SubmitOrderTest {
 
 	public static void main(String[] args) {
 		
@@ -25,13 +25,12 @@ public class StandAloneTest {
 		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().window().maximize();
-		driver.get("https://rahulshettyacademy.com/client");
+		
 		
 		LandingPage landingPage = new LandingPage(driver);
-		
-		driver.findElement(By.id("userEmail")).sendKeys("dipanshi@gmail.com");
-		driver.findElement(By.id("userPassword")).sendKeys("Test@123");
-		driver.findElement(By.id("login")).click();
+		landingPage.goTo();
+		landingPage.loginApplication("dipanshi@gmail.com", "Test@123");
+
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("#toast-container")));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mb-3")));
