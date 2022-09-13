@@ -1,4 +1,4 @@
-package practice;
+package practice.Tests;
 
 import java.time.Duration;
 import java.util.List;
