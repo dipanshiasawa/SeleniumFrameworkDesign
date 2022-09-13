@@ -34,7 +34,7 @@ public class LandingPage extends AbstractComponent {
 	
 	@FindBy(css="#toast-container")
 	WebElement toast;
-	
+		
 		
 	public ProductCatalogue loginApplication(String email, String password)
 	{

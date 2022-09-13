@@ -34,6 +34,7 @@ public class ProductCatalogue extends AbstractComponent {
 	By productsBy = By.cssSelector(".mb-3");
 	By addToCart = By.cssSelector("button:last-of-type");
 	By toast = By.cssSelector("#toast-container");
+	By spinner2 = By.cssSelector(".ng-animating");
 	
 	public List<WebElement> getProductList() {
 		waitForElementToAppear(productsBy);
@@ -52,9 +53,10 @@ public class ProductCatalogue extends AbstractComponent {
 		WebElement prod = getProductByName(productName);
 		prod.findElement(addToCart).click();
 		waitForElementToAppear(toast);
+		//waitForElementToDisappear(spinner);
 		//Since the demo website is having some issue, using thread.sleep here and commenting the actual code
-		waitForElementToDisappear(spinner);
-//		waitForOneSecond();
+		
+		Thread.sleep(5000);
 	}
 	
 }
