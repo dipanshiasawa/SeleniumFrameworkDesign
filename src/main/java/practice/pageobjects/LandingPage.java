@@ -34,6 +34,9 @@ public class LandingPage extends AbstractComponent {
 	
 	@FindBy(css="#toast-container")
 	WebElement toast;
+	
+	@FindBy(css="[class*='flyInOut']")
+	WebElement errorMessage;
 		
 		
 	public ProductCatalogue loginApplication(String email, String password)
@@ -41,12 +44,15 @@ public class LandingPage extends AbstractComponent {
 		userEmail.sendKeys(email);
 		userPassword.sendKeys(password);
 		submit.click();
-		waitForElementToDisappear(toast);
+//		waitForElementToDisappear(toast);
 		ProductCatalogue productCatalogue = new ProductCatalogue(driver);
 		return productCatalogue;
 	}
 	
-	
+	public String getErrorMessage() throws InterruptedException {
+		waitForWebElementToAppear(errorMessage);
+		return errorMessage.getText();
+	}
 	public void goTo()
 	{
 		driver.get("https://rahulshettyacademy.com/client");
