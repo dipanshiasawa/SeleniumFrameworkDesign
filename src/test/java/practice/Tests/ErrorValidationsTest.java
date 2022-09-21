@@ -22,10 +22,10 @@ import practice.pageobjects.ConfirmationPage;
 import practice.pageobjects.LandingPage;
 import practice.pageobjects.ProductCatalogue;
 
-public class ErrorValidations extends BaseTest{
+public class ErrorValidationsTest extends BaseTest{
 
 	@Test
-	public void submitOrder() throws IOException, InterruptedException {
+	public void LoginErrorValidation() throws IOException, InterruptedException {
 		
 		String productName = "ZARA COAT 3";		
 		ProductCatalogue productCatalogue = landingPage.loginApplication("dipanshi@gmail.comjj", "Test@123");
@@ -34,6 +34,22 @@ public class ErrorValidations extends BaseTest{
 		
 	}
 	
+	@Test
+	public void ProductErrorValidation() throws IOException, InterruptedException {
+		
+		String productName = "ZARA COAT 3";
+		
+		ProductCatalogue productCatalogue = landingPage.loginApplication("dipanshiasawa@gmail.com", "Test@123");
+
+		List<WebElement> products = productCatalogue.getProductList();
+		productCatalogue.addProductToCart(productName);
+		CartPage cartPage = productCatalogue.goToCartPage();
+		
+		Boolean match = cartPage.VerifyProductDisplay("ZZZZ");
+		Assert.assertFalse(match);
+
+		
+	}
 	
 	
 }
