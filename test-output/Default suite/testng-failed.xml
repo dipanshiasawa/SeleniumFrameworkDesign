@@ -5,6 +5,7 @@
     <classes>
       <class name="practice.Tests.SubmitOrderTest">
         <methods>
+          <include name="orderHistoryTest"/>
           <include name="submitOrder"/>
           <include name="teardown"/>
           <include name="launchApplication"/>

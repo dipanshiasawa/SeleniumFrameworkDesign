@@ -20,14 +20,16 @@ import practice.pageobjects.CartPage;
 import practice.pageobjects.CheckoutPage;
 import practice.pageobjects.ConfirmationPage;
 import practice.pageobjects.LandingPage;
+import practice.pageobjects.OrderPage;
 import practice.pageobjects.ProductCatalogue;
 
 public class SubmitOrderTest extends BaseTest{
 
+	String productName = "ZARA COAT 3";
+
 	@Test
 	public void submitOrder() throws IOException, InterruptedException {
 		
-		String productName = "ZARA COAT 3";
 		
 		ProductCatalogue productCatalogue = landingPage.loginApplication("dipanshi@gmail.com", "Test@123");
 
@@ -43,6 +45,15 @@ public class SubmitOrderTest extends BaseTest{
 		String confirmMessage = confirmationPage.verifyConfirmationMessage();
 		Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
 		
+	}
+	
+	
+	@Test (dependsOnMethods = {"submitOrder"})
+	public void orderHistoryTest() throws InterruptedException {
+		ProductCatalogue productCatalogue = landingPage.loginApplication("dipanshi@gmail.com", "Test@123");
+		OrderPage orderPage = productCatalogue.goToOrderPage();
+		Boolean match = orderPage.VerifyOrderDisplay(productName);
+		Assert.assertTrue(match);
 	}
 	
 	

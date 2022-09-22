@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import practice.pageobjects.CartPage;
+import practice.pageobjects.OrderPage;
 
 public class AbstractComponent {
 	
@@ -25,6 +26,9 @@ public class AbstractComponent {
 	
 	@FindBy(css="[routerlink*='cart']")
 	WebElement cartHeader;
+	
+	@FindBy(css="[routerlink*='myorders']")
+	WebElement orderHeader;
 
 	public void waitForElementToAppear(By findBy)
 	{
@@ -61,6 +65,12 @@ public class AbstractComponent {
 		cartHeader.click();
 		CartPage cartPage = new CartPage(driver);
 		return cartPage;
+	}
+	
+	public OrderPage goToOrderPage() throws InterruptedException {
+		orderHeader.click();
+		OrderPage orderPage = new OrderPage(driver);
+		return orderPage;
 	}
 	
 	
