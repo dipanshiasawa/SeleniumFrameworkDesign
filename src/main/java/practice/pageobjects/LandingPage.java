@@ -1,6 +1,8 @@
 package practice.pageobjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,15 +43,18 @@ public class LandingPage extends AbstractComponent {
 		
 	public ProductCatalogue loginApplication(String email, String password)
 	{
+		ProductCatalogue productCatalogue = new ProductCatalogue(driver);
 		userEmail.sendKeys(email);
 		userPassword.sendKeys(password);
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
+//		js.executeScript("arguments[0].click();", submit);
 		submit.click();
 //		waitForElementToDisappear(toast);
-		ProductCatalogue productCatalogue = new ProductCatalogue(driver);
 		return productCatalogue;
 	}
 	
 	public String getErrorMessage() throws InterruptedException {
+		
 		waitForWebElementToAppear(errorMessage);
 		return errorMessage.getText();
 	}

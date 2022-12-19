@@ -3,14 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="practice.Tests.SubmitOrderTest">
+      <class name="practice.Tests.ErrorValidationsTest">
         <methods>
-          <include name="orderHistoryTest"/>
-          <include name="submitOrder"/>
+          <include name="LoginErrorValidation"/>
           <include name="teardown"/>
           <include name="launchApplication"/>
         </methods>
-      </class> <!-- practice.Tests.SubmitOrderTest -->
+      </class> <!-- practice.Tests.ErrorValidationsTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

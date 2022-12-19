@@ -39,7 +39,7 @@ public class AbstractComponent {
 	
 	public void waitForWebElementToAppear(WebElement element) throws InterruptedException
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}

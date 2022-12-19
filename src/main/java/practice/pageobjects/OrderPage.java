@@ -27,7 +27,7 @@ public class OrderPage  extends AbstractComponent {
 	WebElement checkoutElement;
 	
 	public Boolean VerifyOrderDisplay(String productName) {
-		Boolean match = productNames.stream().anyMatch(cartProduct->cartProduct.getText().equalsIgnoreCase(productName));
+		Boolean match = productNames.stream().anyMatch(product->product.getText().equalsIgnoreCase(productName));
 		return match;
 	}
 	
